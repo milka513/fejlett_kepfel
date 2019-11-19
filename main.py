@@ -6,6 +6,33 @@ from train_k_neighbours import train as train_neigh
 import matplotlib.pyplot as plt
 from DecisionTree import train as DT
 
+def getBestKValue(maxK, two_feature=False, features=['ecc', 'extent']):
+    im=image.ProcessImages('train', two_value=two_feature, list_=features)
+    X, Y=im.make_all()
+    max = 0.0
+    index = 3
+    x_list = []
+    y_list = []
+    for x in range(3, maxK, 1):
+        # for weight in ['uniform', 'distance']:
+        print(' negighbours: ', 'distance', ' ', x)
+        t2 = train_neigh(x, first_two=True, features=features)
+        t2.train(X, Y)
+        # t2.load(x, weight)
+        v = t2.valid()
+        if (v > max):
+            max = v
+            index = x
+            print(v)
+        x_list.append(x)
+        y_list.append(v)
+
+    plt.plot(x_list, y_list)
+    plt.show()
+
+    print('maximum: ', max, ' neighbours: ', index)
+    return (max, index)
+
 def train_neigh_():
     t = train_neigh(80)
     im = image.ProcessImages('train')
@@ -21,7 +48,8 @@ def train_neigh_():
     for x in range(3, 100, 1):
         # for weight in ['uniform', 'distance']:
         print(' negighbours: ', 'distance', ' ', x)
-        t2 = train_neigh(x, first_two=True)
+        t2 = train_neigh(x, first_two=True, features=['x0', 'y0'])
+        #t2 = train_neigh(x, first_two=True)
         t2.train(X, Y)
         # t2.load(x, weight)
         v = t2.valid()
@@ -39,7 +67,8 @@ def train_neigh_():
 
 
 def main():
-    train_neigh_()
+    #train_neigh_()
+    getBestKValue(100, two_feature=True, features=['x0', 'y0'])
     tree=DT()
     im = image.ProcessImages('train')
     X, Y = im.make_all()
@@ -47,6 +76,9 @@ def main():
     print(tree.test())
     print(tree.valid())
     tree.show(X, Y)
+
+
+
     #out=measure.process('testscissors01-00.png')
     #tree.plot_tree(DT.fit(X, Y))
     #print(out2)
