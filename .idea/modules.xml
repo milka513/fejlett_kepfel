@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/fejlett_kepfel.iml" filepath="$PROJECT_DIR$/.idea/fejlett_kepfel.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/gyak04/.idea/gyak04.iml" filepath="$USER_HOME$/PycharmProjects/gyak04/.idea/gyak04.iml" />
+    </modules>
+  </component>
+</project>
