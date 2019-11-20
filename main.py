@@ -1,4 +1,4 @@
-import  measure
+import measure
 import ProcessImage as image
 from train import train
 import cv2
