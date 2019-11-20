@@ -8,7 +8,33 @@ def getLargestCC(segmentation):
     largestCC = labels == np.argmax(np.bincount(labels.flat)[1:])+1
     return largestCC
 
-def process(image_path):
+# [ecc,extent,minor_axis_length,major_axis_length, per, x0, y0]
+def set(value):
+    list=[]
+    for v in value:
+        list.append(get_value(v))
+    return list
+
+
+
+def get_value(val):
+    if val=='ecc':
+        return 0
+    if val=='extent':
+        return 1
+    if val=='minor_axis_length':
+        return 2
+    if val=='major_axis_length':
+        return 3
+    if val=='per':
+        return 4
+    if val=='x0':
+        return 5
+    if val=='y0':
+        return 6
+
+
+def process(image_path, two_values=False, list=[]):
     image = cv2.imread(image_path)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray = cv2.blur(gray, (3, 3))
@@ -58,6 +84,13 @@ def process(image_path):
         #print(x0, y0)
         out=[ecc,extent,minor_axis_length,major_axis_length, per, x0, y0]
     #cv2.destroyAllWindows()
+    out2=[]
+    if two_values:
+        for v in list:
+            out2.append(out[get_value(v)])
+    else:
+        out2=out
+    out=out2
     return out
 
 

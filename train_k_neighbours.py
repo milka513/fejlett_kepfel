@@ -7,9 +7,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 class train(object):
 
-    def __init__(self, neigh_numbers, first_two=False):
+    def __init__(self, neigh_numbers, first_two=False, features=[]):
         self.neigh_numbers=neigh_numbers
         self.first_two=first_two
+        self.features=features
 
 
     def train(self, X, y):
@@ -30,13 +31,13 @@ class train(object):
         return self.neigh.predict(list)
 
     def test(self):
-        im=image.ProcessImages('test')
+        im=image.ProcessImages('test', two_value=self.first_two, list_=self.features)
         X,Y=im.make_all()
         if self.first_two:
             X=X[:, :2]
         return self.neigh.score(X, Y)
     def valid(self):
-        im=image.ProcessImages('validation')
+        im=image.ProcessImages('validation', two_value=self.first_two, list_=self.features)
         X, Y = im.make_all()
         if self.first_two:
             X=X[:, :2]
