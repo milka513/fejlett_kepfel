@@ -14,14 +14,6 @@ class train(object):
         pass
 
     def train(self, X, y):
-        #mean = X.mean(axis=0)
-        #std = X.std(axis=0)
-        #X = (X - mean) / std
-        #print(X)
-        #self.clf=SGD(loss='log', n_jobs=-1, n_iter_no_change=10, max_iter=10000000,penalty='elasticnet', tol=1e-10)
-        #self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo')
-        #self.clf.fit(X, y)
-
         steps = [('pca', PCA()), ('clf', SVC(kernel='rbf'))]
         pipe = Pipeline(steps)
         pca__n_components=[6]
@@ -45,9 +37,5 @@ class train(object):
 
 
     def predict(self, X):
-
         list=[X]
-        #mean = list.mean(axis=0)
-        #std = list.std(axis=0)
-        #list = (list - mean) / std
         return self.grid.predict(list)

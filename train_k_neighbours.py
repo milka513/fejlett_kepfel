@@ -12,7 +12,6 @@ class train(object):
         self.first_two=first_two
         self.features=features
 
-
     def train(self, X, y):
         if self.first_two:
             X=X[:, :2]
@@ -20,9 +19,6 @@ class train(object):
             self.neigh=neighbors.KNeighborsClassifier(self.neigh_numbers, weights=weight)
             self.neigh.fit(X, y)
             name='out/kneigh_'+str(weight)+'_'+str(self.neigh_numbers)+'.pkl'
-            #with open(name, 'wb') as f:
-            #    f.flush()
-            #    pickle.dump(self.neigh, f)
 
     def predict(self, X):
         if self.first_two:

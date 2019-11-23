@@ -4,7 +4,6 @@ import numpy as np
 import glob
 import measure
 
-
 #Visszater az adott mappaban a labelezett kepekkel
 class ProcessImages(object):
 
@@ -17,11 +16,10 @@ class ProcessImages(object):
 
         index=0
         for filename in glob.glob(self.eleresi_utvonal+"\\"+name+"\\*.png"):
-            #print(filename)
             im=measure.process(filename)
             list[index]=im
             index=index+1
-        #print(name,': ', list)
+
         return list
 
     def make_scissors(self):
@@ -43,10 +41,6 @@ class ProcessImages(object):
         x=scissors.copy()
         x=np.append(x, rock.copy(), axis=0)
         x=np.append(x, paper.copy(), axis=0)
-        #x=x.reshape(x.shape[0], 1, self.INPUT_SIZE_X, self.INPUT_SIZE_Y)
-        #x=np.reshape(x, (60000, s1+s2+s3))
-        #np.concatenate((x, rock))
-        #np.concatenate((x, paper))
         y=np.zeros(s1+s2+s3)
         for i in range(s1, s2+s1):
             y[i]=1
