@@ -8,21 +8,17 @@ import measure
 #Visszater az adott mappaban a labelezett kepekkel
 class ProcessImages(object):
 
-    def __init__(self, eleresi_utvonal, INPUT_SIZE_X=7, two_value=False, list_=[]):
+    def __init__(self, eleresi_utvonal, INPUT_SIZE_X=6):
         self.eleresi_utvonal=eleresi_utvonal
         self.INPUT_SIZE_X=INPUT_SIZE_X
-        self.two_value=two_value
-        self.list_=list_
 
     def make_images(self, name):
-        if self.two_value:
-            self.INPUT_SIZE_X=len(self.list_)
         list=np.zeros((len(glob.glob(self.eleresi_utvonal+"\\"+name+"\\*.png")), self.INPUT_SIZE_X), dtype='float32')
 
         index=0
         for filename in glob.glob(self.eleresi_utvonal+"\\"+name+"\\*.png"):
             #print(filename)
-            im=measure.process(filename, two_values=self.two_value, list=self.list_)
+            im=measure.process(filename)
             list[index]=im
             index=index+1
         #print(name,': ', list)
